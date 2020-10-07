@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.BoardMapper">
+
+
+	<!-- //////////////////////// 게시판 //////////////////////////// -->
+
+	<!-- 게시판 총 게시글 수 세기 -->
+	<select id="TotalCount" resultType="Integer">
+		SELECT COUNT(*)
+		FROM
+		board
+	</select>
+	<!-- 게시판 리스트 불러오기 -->
+	<select id="getBoardList" resultType="BoardDTO"
+		parameterType="BoardDTO">
+		SELECT
+		BOARD_SEQ,
+		TITLE,
+		USER_NAME,
+		UPD_DATE
+		FROM
+		board
+		ORDER
+		BY BOARD_SEQ DESC
+		LIMIT #{startlist}, #{listsize}
+	</select>
+	<!-- 게시판 글 작성 실행하기 -->
+	<insert id="InsertBoardWriteProc" parameterType="BoardDTO">
+		INSERT
+		INTO
+		board
+		(
+		TITLE,
+		CONTENT,
+		USER_NAME,
+		UPD_DATE
+		)
+		VALUES
+		(
+		#{title},
+		#{content},
+		#{user_name},
+		SYSDATE()
+		)
+	</insert>
+	<!-- 게시판 글 디테일 불러오기 -->
+	<select id="getBoardDetail" parameterType="BoardDTO"
+		resultType="BoardDTO">
+		SELECT
+		TITLE,
+		CONTENT,
+		UPD_DATE,
+		USER_NAME,
+		BOARD_SEQ
+		FROM
+		board
+		WHERE
+		BOARD_SEQ = #{Seq}
+	</select>
+	<!-- 게시판 글 수정/삭제 이동 전 권한 확인하기 -->
+	<select id="UserCheck" resultType="BoardDTO"
+		parameterType="BoardDTO">
+		SELECT
+		USER_NAME
+		FROM
+		board
+		WHERE
+		BOARD_SEQ = #{board_seq}
+	</select>
+	<!-- 게시판 글 수정/삭제 창으로 이동하기 -->
+	<select id="BoardReWrite" parameterType="BoardDTO"
+		resultType="BoardDTO">
+		SELECT
+		BOARD_SEQ,
+		TITLE,
+		CONTENT
+		FROM
+		board
+		WHERE
+		BOARD_SEQ =
+		#{board_seq}
+	</select>
+	<!-- 게시판 글 수정하기 실행 -->
+	<update id="BoardReWriteTry" parameterType="BoardDTO">
+		UPDATE
+		board
+		SET
+		TITLE =
+		#{title},
+		CONTENT = #{content},
+		UPD_DATE = SYSDATE()
+		WHERE
+		BOARD_SEQ =
+		#{board_seq}
+	</update>
+	<!-- 게시판 글 삭제 실행 -->
+	<delete id="BoardDelete" parameterType="BoardDTO">
+		DELETE
+		FROM
+		board
+		WHERE
+		BOARD_SEQ = #{board_seq}
+	</delete>
+	<!-- 게시글 삭제하며 해당 글에 달린 댓글 모두 삭제 -->
+	<delete id="BoardDeleteWithCommentDelete"
+		parameterType="CommentDTO">
+		DELETE
+		FROM
+		myreply
+		WHERE
+		BOARD_SEQ = #{board_seq}
+	</delete>
+
+	<!-- //////////////////////// 댓글 //////////////////////////// -->
+
+	<!-- 댓글 리스트 불러오기 -->
+	<select id="readReply" resultType="CommentDTO"
+		parameterType="CommentDTO">
+		SELECT
+		BOARD_SEQ,
+		RNO,
+		CONTENT,
+		WRITER
+		FROM
+		myreply
+		WHERE
+		BOARD_SEQ = #{seq}
+	</select>
+	<!-- 댓글 작성 실행하기 -->
+	<insert id="InsertComment" parameterType="CommentDTO">
+		INSERT INTO myreply (
+		BOARD_SEQ,
+		CONTENT,
+		WRITER
+		)
+		VALUES
+		(
+		#{board_seq},
+		#{content},
+		#{writer}
+		)
+	</insert>
+	<!-- 댓글 수정/삭제 이동 전 권한 확인하기 -->
+	<select id="UserCheck2" resultType="CommentDTO"
+		parameterType="CommentDTO">
+		SELECT
+		WRITER
+		FROM
+		myreply
+		WHERE
+		RNO = #{rno}
+	</select>
+	<!-- 댓글 삭제 실행하기 -->
+	<delete id="CommentDelete" parameterType="CommentDTO">
+		DELETE
+		FROM
+		myreply
+		WHERE
+		RNO = #{rno}
+	</delete>
+	<!-- 댓글 수정창 이동을 위한 정보 불러오기 -->
+	<select id="CommentUpdate" parameterType="CommentDTO"
+		resultType="CommentDTO">
+		SELECT
+		RNO,
+		BOARD_SEQ,
+		WRITER,
+		CONTENT
+		FROM
+		myreply
+		WHERE
+		RNO =
+		#{rno}
+	</select>
+	<!-- 댓글 수정 실행하기 -->
+	<update id="CommentUpdateTry" parameterType="CommentDTO">
+		UPDATE
+		myreply
+		SET
+		CONTENT = #{content}
+		WHERE
+		BOARD_SEQ = #{board_seq} AND
+		RNO = #{rno} AND
+		WRITER = #{writer}
+	</update>
+
+</mapper>
