@@ -61,6 +61,5 @@ public class WeatherController {
 		log.info(this.getClass().getName() + ".Weather 컨트롤러 (JSP출력) 종료");
 		return "/DExellent/Weather";
 	}
-	/* asdgasdga */
-
+	
 }
