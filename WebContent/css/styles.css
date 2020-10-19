@@ -10616,7 +10616,102 @@ section#mypage form#mypageForm :-ms-input-placeholder {
 
 
 
+/* 뮤직플레이어 */
 
+    *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            font-family: 'Sunflower', sans-serif;
+        }
+        .music{
+/*             height: 100vh;
+            display: flex; */
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 50px 0px 10px 0px;
+            font-size: 40px;
+            text-align: center;
+        }
+        header p {
+            font-size: 16px;
+            color: rgb(58, 58, 58);
+        }
+        .pads{
+            background: lightblue;
+            width: 100%;
+            display: flex;
+        }
+        .pads > div{
+            height: 50px;
+            width: 100px;
+            flex: 1;
+            cursor: pointer;
+        }
+        .pads > div:hover {
+            background: lightsteelblue;
+        }
+        .pad1 {
+            background: lightseagreen;
+        }
+        .pad2 {
+            background: rgb(178, 32, 112);
+        }
+        .pad3 {
+            background: rgb(214, 141, 30);
+        }
+        .pad4 {
+            background: rgb(64, 55, 196);
+        }
+        .pad5 {
+            background: rgb(4, 184, 13);
+        }
+        .pad6 {
+            background: rgb(216, 55, 189);
+        }
+
+        @keyframes jump {
+            0%{
+                bottom : 0%;
+                left: 20%;
+            }
+            25%{
+                bottom : 35%;
+                left: 15%;
+            }
+            50%{
+                bottom : 50%;
+                left: 50%;
+            }
+            100% {
+                bottom: 0%;
+                left: 80%;
+            }
+        }
+        .music1 > div {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            bottom: 0%;
+            z-index: 1;
+        }
+        .music2{
+            position: relative;
+            color: grey;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        /* Generated with Bounce.js. Edit at http://bouncejs.com#%7Bl%3A1%2Cs%3A%5B%7BT%3A%22r%22%2Ce%3A%22b%22%2Cd%3A1000%2CD%3A500%2Cf%3A0%2Ct%3A90%2Cs%3A3%2Cb%3A4%7D%2C%7BT%3A%22c%22%2Ce%3A%22b%22%2Cd%3A1000%2CD%3A0%2Cf%3A%7Bx%3A1%2Cy%3A1%7D%2Ct%3A%7Bx%3A0.2%2Cy%3A2%7D%2Cs%3A3%2Cb%3A4%7D%2C%7BT%3A%22c%22%2Ce%3A%22b%22%2Cd%3A1000%2CD%3A1000%2Cf%3A%7Bx%3A1%2Cy%3A1%7D%2Ct%3A%7Bx%3A5%2Cy%3A0.5%7D%2Cs%3A3%2Cb%3A4%7D%5D%7D */
+
+        @keyframes animation { 
+        0% { -webkit-transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+        2.15% { -webkit-transfo  }
 
 
 

@@ -31,9 +31,67 @@
 <link
 	href="http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css"
 	rel="stylesheet" type="text/css">
-
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+    
+        window.addEventListener('load', () =>{
+            //NodeList 객체(array가 아니다)에 선택된 모든 노드를 담는다.
+            const sounds = document.querySelectorAll(".sound");
+            const pads = document.querySelectorAll(".pads div");
+            //console.log(sounds);
+            const music1/* visual */ = document.querySelector('.music1');
+            const music2/* title */ = document.querySelector(".music2")
+            const colors = [
+                "lightseagreen",
+                "rgb(178, 32, 112)",
+                "rgb(214, 141, 30)",
+                "rgb(64, 55, 196)",
+                "rgb(4, 184, 13)",
+                "rgb(216, 55, 189)"
+            ]
 
+            //재생되는 음악이 끝나면 visual에서 비주얼과 제목을 제거
+            sounds.forEach(snd => {
+                snd.onended = function(){
+                    music1.innerHTML = "";
+                    music2.innerHTML = "";
+                };
+            });
+
+            pads.forEach((pad, index) => {
+                pad.addEventListener('click', function(){
+                    //기존에 재생되는 음악을 중지 시켜야 한다.
+                   sounds.forEach(inx => {
+                    //console.log(inx);
+                    inx.pause();
+                   });
+                   if(sounds[index]){
+                    sounds[index].currentTime = 0;
+                    sounds[index].play();
+
+                    //뮤직 제목을 출력해 준다.
+                    //console.log(sounds[index].src) ;
+                    const strArray = sounds[index].src.split("sound/");
+                    music2.innerHTML = strArray[1];
+                   }
+                   
+                    //볼만들고 애니메이션 하기
+                    createBubbles(index);
+                });
+            });
+
+            const createBubbles = (index) => {
+                //기존의 애니메이션 visual을 모두 제거하여 초기화 
+                music1.innerHTML = "";
+                const bubble = document.createElement("div");
+                music1.appendChild(bubble);
+                bubble.style.backgroundColor =  colors[index];
+                bubble.style.top = '300px';
+                bubble.style.animation = 'animation 2000ms linear infinite both';
+            }
+
+        });
+</script>
 
 </head>
 <body id="page-top" style="width: 375px;">
@@ -125,7 +183,7 @@
 	%>
 	<hr>
 	<span style="color: black; font-size: 12px; text-align: center;">※
-		해당 페이지는 모바일 환경 (375x812)에 적합하게 구성되어있습니다</span>
+		해당 페이지는 모바일 환경(375x812)에 알맞게 구성되어있습니다</span>
 	<!-- Footer-->
 	<footer class="footer py-4">
 		<div class="container">
@@ -178,7 +236,41 @@
 	<!-- Services-->
 	<hr style="margin-top: 50px;">
 	<span style="color: black; font-size: 12px; text-align: center;">※
-		해당 페이지는 모바일 환경 (375x812)에 적합하게 구성되어있습니다</span>
+		해당 페이지는 모바일 환경(375x812)에 알맞게 구성되어있습니다</span>
+
+	<!-- 뮤직 플레이어 -->
+	<div class="music">
+		<!-- app -->
+		<header>
+			<h1>Color Tap Music</h1>
+		</header>
+		<!-- <div class="music1"></div>visual -->
+		<p class="music2"></p>
+		<!-- title -->
+		<div class="pads">
+			<div class="pad1">
+				<audio class="sound"
+					src="/sound/DayBreak-I'llSetFireToYourHeart.mp3"></audio>
+			</div>
+			<div class="pad2">
+				<audio class="sound" src="/sound/THORNAPPLE-Seoul.mp3"></audio>
+			</div>
+			<div class="pad3">
+				<audio class="sound" src="/sound/SiamShade-DontTellLies.mp3"></audio>
+			</div>
+			<div class="pad4">
+				<audio class="sound"
+					src="/sound/RomanticPunch-SleepwalkingDisease.mp3"></audio>
+			</div>
+			<div class="pad5">
+				<audio class="sound" src="/sound/BolbbalkanSachungi-Travel.mp3"></audio>
+			</div>
+			<div class="pad6">
+				<audio class="sound" src="/sound/SiamShade-Risk.mp3"></audio>
+			</div>
+		</div>
+	</div>
+	<!-- 동물뉴스 -->
 	<section class="page-section" id="services">
 		<div class="container">
 			<div class="text-center">
@@ -204,7 +296,7 @@
 		</div>
 	</section>
 
-	<!-- About-->
+	<!-- 동물백과-->
 	<section class="page-section" id="about">
 		<div class="container">
 			<div class="text-center">
@@ -228,7 +320,7 @@
 		</div>
 	</section>
 
-	<!-- Team-->
+	<!-- 그래프 -->
 	<section class="page-section bg-light" id="Graph">
 		<div class="container">
 			<div class="text-center">
@@ -243,17 +335,15 @@
 						style="text-align: center; line-height: 30px;">
 						재미로 알아보는 <br>견종 그래프
 					</h3>
-				</div>
 
-				<iframe src="/DExellent/Graph.do" width="351px"
-					height="600px" name="Graph" id="Graph"
-					frameborder="1" scrolling="yes" style="overflow-x: hidden"
-					target="" /></iframe>
+				<iframe src="/DExellent/Graph.do" width="351px" height="600px"
+					name="Graph" id="Graph" frameborder="1" scrolling="yes"
+					style="overflow-x: hidden" target="" /></iframe>
+				</div>
 			</div>
-		</div>
-	</section>	
-	
-	<!-- Team-->
+	</section>
+
+	<!-- 강아지 유치원 -->
 	<section class="page-section bg-light" id="team">
 		<div class="container">
 			<div class="text-center">
@@ -278,7 +368,7 @@
 		</div>
 	</section>
 
-	<!-- mypage-->
+	<!-- 마이페이지 -->
 	<section class="page-section" id="mypage">
 		<div class="container">
 			<div class="text-center">
@@ -292,8 +382,7 @@
 		</div>
 	</section>
 
-
-	<!-- Contact-->
+	<!-- 게시판 -->
 	<section class="page-section" id="contact">
 		<div class="container">
 			<div class="text-center">
@@ -315,8 +404,7 @@
 					scrolling="yes" style="overflow-x: hidden" /></iframe>
 	</section>
 
-
-	<!-- Portfolio Grid-->
+	<!-- 유튜브 -->
 	<section class="page-section bg-light" id="portfolio">
 		<div class="container">
 			<div class="text-center">
@@ -333,13 +421,109 @@
 					</h3>
 				</div>
 
-				<iframe src="/DExellent/Youtube.do" width="351px" height="600px"
-					name="Youtube" id="Youtube" frameborder="1" scrolling="yes"
-					style="overflow-x: hidden" /></iframe>
+				<div style="overflow-x: hidden">
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/82uA8WHCWmw" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/bfkGxCTYwDM" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/GKYtC1h1UBk" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/_LDtn8znrtY" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/hi__cxcLaKw" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/K0CLi9m0ebA" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/77Nw-J4qNIk" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/EejQENqECFA" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/yeWcyAo9QcA" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/k9iZuRqoypY" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/k74RYKGnHKA" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/2-njQH11MYw" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/qPImAjgXbAk" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/QgT13KndSLE" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/p4zLQERYBTQ" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/HyUpSHqEQsI" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/C3mG-qhjSRU" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/OLazqoZqyOc" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/eEAUBN8KSBU" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+					<hr>
+					<iframe width="350" height="200"
+						src="https://www.youtube.com/embed/YitwCLUAH-g" frameborder="0"
+						allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen></iframe>
+				</div>
 			</div>
-		</div>
 	</section>
-
 
 	<!-- Footer-->
 	<footer class="footer py-4">
@@ -373,6 +557,7 @@
 			</div>
 		</div>
 	</footer>
+
 
 	<!-- Bootstrap core JS-->
 	<script

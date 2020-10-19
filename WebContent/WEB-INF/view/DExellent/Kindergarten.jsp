@@ -21,7 +21,7 @@
 .map_wrap {
 	position: relative;
 	width: 100%;
-	height: 600px;
+	height: 500px;
 }
 
 #menu_wrap {
@@ -29,8 +29,7 @@
 	top: 0;
 	left: 0;
 	bottom: 0;
-	width: 200px;
-	height: 400;
+	width: 250px;
 	margin: 10px 0 30px 10px;
 	padding: 5px;
 	overflow-y: auto;
@@ -195,17 +194,16 @@
 </style>
 </head>
 <body>
-	<div class="map_wrap">
+	<div class="map_wrap" style="width:330px; height:585px;">
 		<div id="map"
 			style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
 
-		<div id="menu_wrap" class="bg_white">
+		<div id="menu_wrap" class="bg_white" style="width:180px; height:500px;">
 			<div class="option">
 				<div>
 					<form onsubmit="searchPlaces(); return false;">
-						키워드 : <br>
 						<input type="text" value="서울 강아지 유치원" id="keyword" size="15">
-						<button type="submit">검색하기</button>
+						<button type="submit">검색</button>
 					</form>
 				</div>
 			</div>
@@ -216,7 +214,7 @@
 	</div>
 
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=258eed02b31182158f6eebe36a635c4c&libraries=services"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d9f38f61d7575e6da921911737241b92&libraries=services"></script>
 	<script>
 		// 마커를 담을 배열입니다
 		var markers = [];

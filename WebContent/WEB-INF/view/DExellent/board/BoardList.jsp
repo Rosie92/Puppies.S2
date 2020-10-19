@@ -46,7 +46,7 @@ System.out.println("bList.size :" + bList.size());
 				for (BoardDTO bDTO : bList) {
 			%>
 			<div style="padding: 15px 0px 20px 0px;">
-				<span style="margin-left: 5px"> <%=CmmUtil.nvl(bDTO.getBoard_seq())%>
+				<span style="margin-left: 4px"> <%=CmmUtil.nvl(bDTO.getBoard_seq())%>
 				</span> <span>
 					<div
 						style="width: 210px; text-align: center; display: inline-block; word-break: break-all;">
