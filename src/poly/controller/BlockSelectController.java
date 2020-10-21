@@ -8,13 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class YoutubeController {
+public class BlockSelectController {
 	private Logger log = Logger.getLogger(this.getClass().getName());
 
-	@RequestMapping(value = "/DExellent/Youtube")
+	@RequestMapping(value = "/DExellent/BlockSelect")
 	public String index(HttpSession session) throws Exception {
 		log.info(this.getClass().getName() + "########인덱스 화면 실행########");
-		return "/DExellent/Youtube";
+		return "/DExellent/BlockSelect";
 	}
 
 }

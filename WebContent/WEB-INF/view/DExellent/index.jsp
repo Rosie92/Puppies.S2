@@ -32,6 +32,14 @@
 	href="http://fonts.googleapis.com/earlyaccess/nanumbrushscript.css"
 	rel="stylesheet" type="text/css">
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.js"></script>
+<!-- 캘린더 -->
+<!-- 헥트릭스 -->
+
+
+
+
 <script>
     
         window.addEventListener('load', () =>{
@@ -238,6 +246,18 @@
 	<span style="color: black; font-size: 12px; text-align: center;">※
 		해당 페이지는 모바일 환경(375x812)에 알맞게 구성되어있습니다</span>
 
+	<!-- 미니게임 -->
+	<section class="page-section" id="services">
+		<div class="container">
+			<div class="text-center">
+				<h2 class="section-heading text-uppercase">Mini Game</h2>
+			</div>
+			</div>
+			<iframe src="/DExellent/BlockSelect.do" width="351px" height="450px"
+				name="Title" id="Title" frameborder="1" scrolling="yes"
+				style="overflow-x: hidden; margin-left: 12px;" /></iframe>
+	</section>
+
 	<!-- 뮤직 플레이어 -->
 	<div class="music">
 		<!-- app -->
@@ -270,12 +290,77 @@
 			</div>
 		</div>
 	</div>
+	<br>
+	<br>
+	<br>
+
+	<!-- 간편 날씨 정보 -->
+	<section>
+		<h1 style="text-align: center;">Quick Weather</h1>
+		<p style="text-align: center">
+			<img class="img-fluid" src="../../assets/img/DEIMG/weather.png"
+				style="width: 370px; height: 220px;">
+		</p>
+		<script>
+	$.getJSON('http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=375625767fd514b11cd4f5166ca87b8e'
+			,function(data){
+		var $minTemp = data.list[0].main.temp_min;
+		var $maxTemp = data.list[0].main.temp_max;
+		var $humidity = data.list[0].main.humidity;
+		var $type = data.list[0].weather[0].description;
+		var $sky = data.list[0].weather[0].main;
+		var $probability = data.list[0].clouds.all;
+		
+		if($sky == "Clouds")
+			$sky = "구름";
+		else if($sky == "Rain")
+			$sky = "비";
+		else
+			$type = "맑음";
+		
+		$('.clowtemp').append(Math.round(($minTemp-273.15)*10)/10.0 + "도");
+	    $('.chightemp').append(Math.round(($maxTemp-273.15)*10)/10.0 + "도");
+		$('.chumidity').append($humidity + "%");
+		$('.csky').append($sky);
+		$('.ctype').append($type);
+		$('.cprobability').append($probability + "%");
+	});
+</script>
+		<div style="color: black; text-align: center; margin-bottom: 170px;">
+
+			<div class="csky" style="float: left; width: 120px;">
+				<img src="/assets/img/DEIMG/weather11.png"
+					style="width: 60px; height: 60px;">
+			</div>
+			<div class="cprobability" style="float: left; width: 120px;">
+				<img src="/assets/img/DEIMG/weather33.jpg"
+					style="width: 60px; height: 60px;">
+			</div>
+
+			<div class="chumidity" style="width: 120px; float: left;">
+				<img src="/assets/img/DEIMG/weather22.jpg"
+					style="width: 60px; height: 60px;">
+			</div>
+			<div class="chightemp"
+				style="float: left; width: 120px; margin-left: 8px;">
+				<img src="/assets/img/DEIMG/up.png"
+					style="width: 60px; height: 60px;">
+			</div>
+
+			<div class="clowtemp" style="float: left; width: 120px;">
+				<img src="/assets/img/DEIMG/down.png"
+					style="width: 60px; height: 60px;">
+			</div>
+
+		</div>
+
+	</section>
+
 	<!-- 동물뉴스 -->
 	<section class="page-section" id="services">
 		<div class="container">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase">NEWS</h2>
-				<hr style="width: 60%; margin-top: 30px; margin-bottom: 30px;">
 			</div>
 
 			<p style="text-align: center">
@@ -301,7 +386,6 @@
 		<div class="container">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase">INFORMATION</h2>
-				<hr style="width: 60%; margin-top: 30px; margin-bottom: 30px;">
 				<p style="text-align: center">
 					<img class="img-fluid" src="../../assets/img/DEIMG/qwerqwer.jpg"
 						style="width: 350px; height: 210px;">
@@ -325,20 +409,18 @@
 		<div class="container">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase">GRAPH</h2>
-				<hr style="width: 60%; margin-top: 30px; margin-bottom: 30px;">
 				<p style="text-align: center">
 					<img class="img-fluid" src="../../assets/img/DEIMG/Graph.jpg"
 						style="width: 350px; height: 210px;">
 				</p>
 				<div class="portfolio-caption">
 					<h3 class="section-subheading text-muted"
-						style="text-align: center; line-height: 30px;">
-						재미로 알아보는 <br>견종 그래프
-					</h3>
+						style="text-align: center; line-height: 30px;">재미로 알아보는 견종
+						그래프</h3>
 
-				<iframe src="/DExellent/Graph.do" width="351px" height="600px"
-					name="Graph" id="Graph" frameborder="1" scrolling="yes"
-					style="overflow-x: hidden" target="" /></iframe>
+					<iframe src="/DExellent/Graph.do" width="351px" height="600px"
+						name="Graph" id="Graph" frameborder="1" scrolling="yes"
+						style="overflow-x: hidden" target="" /></iframe>
 				</div>
 			</div>
 	</section>
@@ -348,7 +430,6 @@
 		<div class="container">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase">KINDERGARTEN</h2>
-				<hr style="width: 60%; margin-top: 30px; margin-bottom: 30px;">
 				<p style="text-align: center">
 					<img class="img-fluid" src="../../assets/img/DEIMG/kinder.jpg"
 						style="width: 350px; height: 210px;">
@@ -387,7 +468,6 @@
 		<div class="container">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase">BOARD</h2>
-				<hr style="width: 60%; margin-top: 30px; margin-bottom: 30px;">
 				<p style="text-align: center">
 					<img class="img-fluid" src="../../assets/img/DEIMG/board.jpg"
 						style="width: 350px; height: 210px;">
@@ -409,7 +489,6 @@
 		<div class="container">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase">YOUTUBE</h2>
-				<hr style="width: 60%; margin-top: 30px; margin-bottom: 30px;">
 				<p style="text-align: center">
 					<img class="img-fluid" src="../../assets/img/DEIMG/youtubeimg.jpg"
 						style="width: 350px; height: 210px;">
@@ -558,7 +637,37 @@
 		</div>
 	</footer>
 
+	<!-- 
+	<script type="text/javascript">
+	$(window).on("load", function() {
+		getWeather();
+	});
 
+	function getWeather() {
+
+		var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=375625767fd514b11cd4f5166ca87b8e";
+        $.ajax({
+            url: apiURI,
+            dataType: "json",
+            type: "GET",
+            async: "false",
+            success: function(resp) {
+                console.log(resp);
+                console.log("현재온도 : "+ (resp.main.temp- 273.15) );
+                console.log("현재습도 : "+ resp.main.humidity);
+                console.log("날씨 : "+ resp.weather[0].main );
+                console.log("상세날씨설명 : "+ resp.weather[0].description );
+                console.log("날씨 이미지 : "+ resp.weather[0].icon );
+                console.log("바람   : "+ resp.wind.speed );
+                console.log("나라   : "+ resp.sys.country );
+                console.log("도시이름  : "+ resp.name );
+                console.log("구름  : "+ (resp.clouds.all) +"%" );                 
+            }
+        })
+    }
+
+</script>
+ -->
 	<!-- Bootstrap core JS-->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
