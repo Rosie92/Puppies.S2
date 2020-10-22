@@ -19,6 +19,19 @@
 
 	<dependencies>
 
+		<!-- Tiles -->
+<!-- 		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${org.apache.tiles-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>${org.apache.tiles-version}</version>
+		</dependency> -->
+
 		<!-- google api -->
 		<dependency>
 			<groupId>com.google.api-client</groupId>
