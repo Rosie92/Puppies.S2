@@ -719,3 +719,4 @@ div#memory_board>div {
 <%
 	}
 %>
+<!-- 끝! -->
